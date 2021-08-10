@@ -9,6 +9,7 @@ public class ProductAggregate {
   private final List<RecommendationSummary> recommendations;
   private final List<ReviewSummary> reviews;
   private final ServiceAddresses serviceAddresses;
+  private final byte[] buff;
 
   public ProductAggregate(
     int productId,
@@ -16,7 +17,7 @@ public class ProductAggregate {
     int weight,
     List<RecommendationSummary> recommendations,
     List<ReviewSummary> reviews,
-    ServiceAddresses serviceAddresses) {
+    ServiceAddresses serviceAddresses,byte[] buff) {
 
     this.productId = productId;
     this.name = name;
@@ -24,6 +25,11 @@ public class ProductAggregate {
     this.recommendations = recommendations;
     this.reviews = reviews;
     this.serviceAddresses = serviceAddresses;
+    this.buff = buff;
+  }
+
+  public byte[] getBuff() {
+    return buff;
   }
 
   public int getProductId() {

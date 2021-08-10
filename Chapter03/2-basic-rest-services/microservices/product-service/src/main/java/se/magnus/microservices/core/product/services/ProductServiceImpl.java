@@ -10,30 +10,34 @@ import se.magnus.api.exceptions.InvalidInputException;
 import se.magnus.api.exceptions.NotFoundException;
 import se.magnus.util.http.ServiceUtil;
 
+import java.io.ByteArrayOutputStream;
+
 @RestController
 public class ProductServiceImpl implements ProductService {
 
-  private static final Logger LOG = LoggerFactory.getLogger(ProductServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ProductServiceImpl.class);
 
-  private final ServiceUtil serviceUtil;
+    private final ServiceUtil serviceUtil;
 
-  @Autowired
-  public ProductServiceImpl(ServiceUtil serviceUtil) {
-    this.serviceUtil = serviceUtil;
-  }
-
-  @Override
-  public Product getProduct(int productId) {
-    LOG.debug("/product return the found product for productId={}", productId);
-
-    if (productId < 1) {
-      throw new InvalidInputException("Invalid productId: " + productId);
+    @Autowired
+    public ProductServiceImpl(ServiceUtil serviceUtil) {
+        this.serviceUtil = serviceUtil;
     }
 
-    if (productId == 13) {
-      throw new NotFoundException("No product found for productId: " + productId);
-    }
+    @Override
+    public Product getProduct(int productId) {
+        LOG.debug("/product return the found product for productId={}", productId);
 
-    return new Product(productId, "name-" + productId, 123, serviceUtil.getServiceAddress());
-  }
+        if (productId < 1) {
+            throw new InvalidInputException("Invalid productId: " + productId);
+        }
+
+        if (productId == 13) {
+            throw new NotFoundException("No product found for productId: " + productId);
+        }
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        byteArrayOutputStream.write(65);
+        byteArrayOutputStream.write(66);
+        return new Product(productId, "name-" + productId, 123, serviceUtil.getServiceAddress(), byteArrayOutputStream.toByteArray());
+    }
 }

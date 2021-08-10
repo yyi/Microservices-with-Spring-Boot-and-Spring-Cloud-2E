@@ -85,7 +85,7 @@ echo "Start Tests:" `date`
 echo "HOST=${HOST}"
 echo "PORT=${PORT}"
 
-if [[ $@ == *"start"* ]]
+if [[ $@ == *start* ]]
 then
   echo "Restarting the test environment..."
   echo "$ docker-compose down --remove-orphans"
@@ -126,7 +126,7 @@ assertEqual "\"Invalid productId: -1\"" "$(echo $RESPONSE | jq .message)"
 assertCurl 400 "curl http://$HOST:$PORT/product-composite/invalidProductId -s"
 assertEqual "\"Type mismatch.\"" "$(echo $RESPONSE | jq .message)"
 
-if [[ $@ == *"stop"* ]]
+if [[ $@ == *stop* ]]
 then
     echo "We are done, stopping the test environment..."
     echo "$ docker-compose down"

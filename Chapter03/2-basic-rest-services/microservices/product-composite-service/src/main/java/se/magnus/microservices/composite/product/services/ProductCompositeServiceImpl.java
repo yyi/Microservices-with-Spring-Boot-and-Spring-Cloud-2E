@@ -20,7 +20,7 @@ public class ProductCompositeServiceImpl implements ProductCompositeService {
   @Autowired
   public ProductCompositeServiceImpl(
     ServiceUtil serviceUtil, ProductCompositeIntegration integration) {
-    
+
     this.serviceUtil = serviceUtil;
     this.integration = integration;
   }
@@ -58,7 +58,7 @@ public class ProductCompositeServiceImpl implements ProductCompositeService {
         .collect(Collectors.toList());
 
     // 3. Copy summary review info, if available
-    List<ReviewSummary> reviewSummaries = 
+    List<ReviewSummary> reviewSummaries =
       (reviews == null) ? null : reviews.stream()
         .map(r -> new ReviewSummary(r.getReviewId(), r.getAuthor(), r.getSubject()))
         .collect(Collectors.toList());
@@ -69,6 +69,6 @@ public class ProductCompositeServiceImpl implements ProductCompositeService {
     String recommendationAddress = (recommendations != null && recommendations.size() > 0) ? recommendations.get(0).getServiceAddress() : "";
     ServiceAddresses serviceAddresses = new ServiceAddresses(serviceAddress, productAddress, reviewAddress, recommendationAddress);
 
-    return new ProductAggregate(productId, name, weight, recommendationSummaries, reviewSummaries, serviceAddresses);
+    return new ProductAggregate(productId, name, weight, recommendationSummaries, reviewSummaries, serviceAddresses,product.getBuff());
   }
 }

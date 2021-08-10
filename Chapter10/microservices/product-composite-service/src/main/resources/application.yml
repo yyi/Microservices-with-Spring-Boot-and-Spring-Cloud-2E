@@ -85,6 +85,11 @@ eureka:
 spring.cloud.stream:
   defaultBinder: rabbit
   default.contentType: application/json
+  rabbit:
+    bindings:
+      products-out-0:
+        producer:
+          routingKeyExpression: headers.routerKey
   bindings:
     products-out-0:
       destination: products
@@ -116,6 +121,7 @@ logging:
 
 management.endpoint.health.show-details: "ALWAYS"
 management.endpoints.web.exposure.include: "*"
+
 ---
 spring.config.activate.on-profile: docker
 
